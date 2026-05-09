@@ -18,35 +18,69 @@
       <div class="eyebrow">Privacy Policy</div>
       <h1>Clipboard Pro+ Privacy Policy</h1>
       <p>Clipboard Pro+ stores the clipboard items you save so you can search, organize, and paste them later.</p>
-      <p class="muted">Effective date: April 16, 2026</p>
+      <p>Clipboard Pro+ does not require account registration, does not operate a developer backend for clipboard history, and does not sell clipboard content.</p>
+      <p class="muted">Effective date: May 9, 2026</p>
     </section>
 
     <section class="card">
-      <h2>What Clipboard Pro+ Stores</h2>
+      <h2>Information You Save</h2>
       <ul>
         <li>Clipboard text and links that you save.</li>
         <li>Favorite status for saved clips.</li>
         <li>Tags you assign to saved clips.</li>
+        <li>Local AI titles, summaries, suggested tags, suggested actions, or rewrites generated for saved clips when supported.</li>
         <li>App preferences such as appearance, tracking, and history limits.</li>
         <li>Subscription state needed to unlock Premium features.</li>
       </ul>
     </section>
 
     <section class="card">
-      <h2>Where Data Is Stored</h2>
+      <h2>Clipboard Access And Tracking</h2>
+      <ul>
+        <li>Clipboard tracking can be turned on or off in Settings.</li>
+        <li>When tracking is enabled, Clipboard Pro+ saves supported clipboard text and links while the main app is open and active.</li>
+        <li>Clipboard Pro+ is not a continuous background clipboard monitor.</li>
+        <li>You can also add items manually or save selected text and web URLs through the share extension.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Storage And Sync</h2>
       <ul>
         <li>Clipboard history is stored on your device by default.</li>
-        <li>If you use Premium sync, saved clipboard data may also sync through your private iCloud account so it can appear on your own devices.</li>
+        <li>The app uses Apple App Groups and UserDefaults shared storage so the main app, keyboard extension, and share extension can exchange saved clip lists and entitlement state.</li>
+        <li>If you use Premium sync, saved clipboard data may also sync through your private iCloud account so it can appear on your own devices signed into the same Apple Account.</li>
+        <li>iCloud sync is provided by Apple and is subject to your Apple Account and iCloud settings.</li>
         <li>Clipboard Pro+ does not upload clipboard history to a developer-operated server.</li>
       </ul>
     </section>
 
     <section class="card">
-      <h2>Extensions</h2>
+      <h2>Keyboard Extension And Full Access</h2>
       <ul>
-        <li>The keyboard extension works as a normal keyboard without Full Access.</li>
+        <li>The keyboard extension can be selected without Full Access, but saved clips require Full Access to appear inside the keyboard.</li>
         <li>If you enable <strong>Allow Full Access</strong>, the keyboard can read and update shared saved-clip lists from the app group.</li>
-        <li>The share extension receives shared text and web URLs and writes that content into shared app-group storage so the main app can import it into clipboard history.</li>
+        <li>Full Access is used to show saved clips, insert selected clips, copy selected clips to the pasteboard, and update the Recently Copied list.</li>
+        <li>Full Access is not used to send typed keystrokes, keyboard input, clipboard item text, or saved clips to a developer server.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Share Extension</h2>
+      <ul>
+        <li>The share extension can receive text and web URLs that you choose to share from other apps.</li>
+        <li>Shared content is written into shared app-group storage so the main app can import it into clipboard history.</li>
+        <li>Free users can save a limited number of incoming items. Premium users can save multi-item imports when available.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>On-Device AI Features</h2>
+      <ul>
+        <li>On supported devices and operating systems, Clipboard Pro+ may use Apple's on-device Foundation Models to generate local titles, summaries, tags, suggested actions, and rewrites for saved clipboard items.</li>
+        <li>These AI features process the selected clipboard item on device and do not send clipboard content to a developer-operated AI service.</li>
+        <li>Clipboard Pro+ also uses on-device system detection for supported actions such as links, phone numbers, email addresses, and map addresses.</li>
+        <li>If on-device AI is unavailable, these features may be limited or unavailable.</li>
       </ul>
     </section>
 
@@ -60,20 +94,35 @@
     </section>
 
     <section class="card">
-      <h2>Tracking And Advertising</h2>
+      <h2>Analytics</h2>
       <ul>
-        <li>Clipboard Pro+ does not include third-party advertising SDKs.</li>
-        <li>Clipboard Pro+ does not use third-party tracking code to follow you across apps or websites.</li>
+        <li>Clipboard Pro+ uses Firebase Analytics to measure app launches, screen views, and feature actions so the app can be improved.</li>
+        <li>The app's privacy manifest declares Product Interaction, Other Usage Data, and Device ID for analytics, with tracking disabled and data not linked to the user's identity.</li>
+        <li>Analytics events may include app and feature metadata, such as screen name, action name, content type, item count, tag count, pinned status, AI availability/result, subscription state, and app language.</li>
+        <li>Analytics events do not include clipboard item text, saved links, typed keyboard content, shared content, AI-generated text, payment-card details, or account credentials.</li>
+        <li>Firebase may process app instance identifiers and device or app information needed to provide analytics.</li>
       </ul>
     </section>
 
     <section class="card">
-      <h2>User Controls</h2>
+      <h2>Tracking, Advertising, And Sale Of Data</h2>
+      <ul>
+        <li>Clipboard Pro+ does not include third-party advertising SDKs.</li>
+        <li>Clipboard Pro+ does not use third-party tracking code to follow you across apps or websites.</li>
+        <li>Firebase Analytics is not used for third-party advertising or cross-app tracking.</li>
+        <li>Clipboard Pro+ does not sell clipboard content or analytics data to advertisers.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Retention And User Controls</h2>
       <ul>
         <li>You can turn clipboard tracking on or off in Settings.</li>
         <li>You can clear saved history at any time.</li>
         <li>You can delete or edit individual items.</li>
+        <li>You can remove favorites and change history limits where available.</li>
         <li>You can manage or cancel subscriptions through Apple.</li>
+        <li>You can disable iCloud sync by turning off Premium sync features or changing your iCloud settings.</li>
       </ul>
     </section>
 
