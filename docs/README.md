@@ -1,16 +1,19 @@
-# GitHub Pages Setup
+# Clipboard Pro+ GitHub Pages site
 
-This folder is ready to publish with GitHub Pages.
+This folder is the static marketing, support, and privacy site. The homepage uses
+local images in `assets/`, local CSS and a small animation script. It has no build
+step or external runtime dependency.
 
 ## Pages URLs
 
 - Site root: `https://mahmoudfotta.github.io/Clipboard-pro-plus/`
 - Support page: `https://mahmoudfotta.github.io/Clipboard-pro-plus/support/`
-- Privacy policy: `https://mahmoudfotta.github.io/Clipboard-pro-plus/privacy-policy/`
+- iPhone and iPad privacy policy: `https://mahmoudfotta.github.io/Clipboard-pro-plus/privacy-policy/`
+- Mac privacy policy: `https://mahmoudfotta.github.io/Clipboard-pro-plus/mac-privacy-policy/`
 
 ## Enable GitHub Pages
 
-1. Copy this `docs/` folder into the public repository `https://github.com/mahmoudfotta/Clipboard-pro-plus.git`.
+1. Copy this entire `docs/` folder, including `assets/`, `home.css`, `ai.css`, `home-motion.js`, and all policy pages, into the public repository `https://github.com/mahmoudfotta/Clipboard-pro-plus.git`.
 2. Push that repository.
 3. Open the public repository on GitHub.
 4. Go to `Settings` > `Pages`.
@@ -22,5 +25,19 @@ This folder is ready to publish with GitHub Pages.
 
 After Pages is live, use:
 
+- Marketing URL: `https://mahmoudfotta.github.io/Clipboard-pro-plus/`
 - Support URL: `https://mahmoudfotta.github.io/Clipboard-pro-plus/support/`
-- Privacy Policy URL: `https://mahmoudfotta.github.io/Clipboard-pro-plus/privacy-policy/`
+- iPhone and iPad Privacy Policy URL: `https://mahmoudfotta.github.io/Clipboard-pro-plus/privacy-policy/`
+- Mac Privacy Policy URL: `https://mahmoudfotta.github.io/Clipboard-pro-plus/mac-privacy-policy/`
+
+## Content and assets
+
+The homepage links to the shared iPhone, iPad, and Mac App Store record. The Mac
+app is available, and its feature copy reflects the current native build. The
+mobile and Mac privacy policies stay at separate URLs. Keep those paths stable
+when publishing.
+
+The homepage images are resized from the approved icon and native iOS/Mac
+captures in `AppStore/iOS-Campaign/` and `AppStore/Mac/Screenshots/source/`.
+The AI section uses the native iPhone AI Tools capture and describes its
+Premium, operating-system, and Apple Intelligence requirements.

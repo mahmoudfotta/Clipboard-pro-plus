@@ -1,50 +1,165 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="home-page">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Clipboard Pro+</title>
-  <meta name="description" content="Public support and privacy pages for Clipboard Pro+.">
-  <link rel="stylesheet" href="./site.css">
+  <meta name="theme-color" content="#f7f5f0">
+  <meta name="description" content="Clipboard Pro+ keeps text, links, and favorite replies searchable across iPhone, iPad, and Mac, with on-device AI tools on compatible mobile devices.">
+  <title>Clipboard Pro+ — Keep the good stuff</title>
+  <link rel="icon" type="image/png" href="./assets/app-icon.png">
+  <link rel="stylesheet" href="./site.css?v=20260923-5">
+  <link rel="stylesheet" href="./home.css?v=20260923-5">
+  <link rel="stylesheet" href="./ai.css?v=20260923-5">
 </head>
-<body>
-  <main class="page">
-    <section class="hero">
-      <div class="eyebrow">Clipboard Pro+</div>
-      <h1>Support, Privacy, and Launch Links</h1>
-      <p class="muted">Clipboard Pro+ helps you save copied text, organize favorite clips, and paste faster with a custom keyboard and share extension.</p>
-      <div class="nav">
-        <a class="button primary" href="./support/">Support</a>
-        <a class="button" href="./privacy-policy/">Privacy Policy</a>
-        <a class="button" href="https://github.com/mahmoudfotta/Clipboard-pro-plus">GitHub</a>
+<body class="home">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header shell">
+    <a class="brand" href="./" aria-label="Clipboard Pro+ home">
+      <img src="./assets/app-icon.png" width="44" height="44" alt="">
+      <span>Clipboard Pro<span class="brand-plus">+</span></span>
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="#ios">iPhone &amp; iPad</a>
+      <a href="#ai">AI tools</a>
+      <a href="#mac">Mac</a>
+      <a href="./support/">Support</a>
+    </nav>
+    <a class="nav-cta" href="https://apps.apple.com/us/app/clipboard-pro-paste-manager/id6761011158" target="_blank" rel="noopener noreferrer">View on the App Store <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main id="main">
+    <section class="hero-section shell" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="kicker"><span class="kicker-dot" aria-hidden="true"></span> A better home for what you copy</p>
+        <h1 id="hero-title">Keep the<br>good stuff.<br><span>Use it again.</span></h1>
+        <p class="hero-lead">Clipboard Pro+ turns useful text, links, and everyday replies into a searchable library that is ready when you are.</p>
+        <div class="hero-actions">
+          <a class="home-button primary" href="https://apps.apple.com/us/app/clipboard-pro-paste-manager/id6761011158" target="_blank" rel="noopener noreferrer">Get it for iPhone &amp; iPad <span aria-hidden="true">↗</span></a>
+          <a class="home-button secondary" href="#mac">Explore the Mac app <span aria-hidden="true">↓</span></a>
+        </div>
+        <p class="hero-availability">Available now for iPhone, iPad, and Mac.</p>
+      </div>
+      <div class="hero-visual">
+        <div class="visual-halo" aria-hidden="true"></div>
+        <figure class="mac-window hero-mac">
+          <div class="window-bar"><span class="traffic-lights" aria-hidden="true"><i></i><i></i><i></i></span><span>Clipboard Pro+ · Mac</span></div>
+          <img src="./assets/mac-library.png" width="1600" height="1067" alt="Clipboard Pro+ Mac library with searchable clips and a selected note.">
+        </figure>
+        <figure class="phone-frame hero-phone">
+          <img src="./assets/iphone-history.png" width="690" height="1500" alt="Clipboard Pro+ on iPhone showing searchable history, saved clips, and Favorites.">
+        </figure>
+        <div class="floating-chip" aria-hidden="true"><span>✦</span> Your words, ready again</div>
       </div>
     </section>
 
-    <section class="grid">
-      <article class="card">
-        <h2>Support</h2>
-        <p>Get setup help for clipboard tracking, the keyboard extension, share extension imports, and purchase recovery.</p>
-        <a class="button" href="./support/">Open Support Page</a>
-      </article>
+    <div class="benefit-bar shell" aria-label="What Clipboard Pro+ helps you do">
+      <span><strong>01</strong> Save what matters</span>
+      <span class="benefit-arrow" aria-hidden="true">→</span>
+      <span><strong>02</strong> Find it quickly</span>
+      <span class="benefit-arrow" aria-hidden="true">→</span>
+      <span><strong>03</strong> Put it to work</span>
+    </div>
 
-      <article class="card">
-        <h2>Privacy Policy</h2>
-        <p>Read how Clipboard Pro+ stores clipboard data, how iCloud sync works, and what controls are available to the user.</p>
-        <a class="button" href="./privacy-policy/">Open Privacy Policy</a>
-      </article>
+    <section class="platform-section ios-section shell" id="ios" aria-labelledby="ios-title">
+      <div class="ios-visual">
+        <div class="ios-glow" aria-hidden="true"></div>
+        <figure class="phone-frame ios-phone-back">
+          <img src="./assets/iphone-favorites.png" width="690" height="1500" loading="lazy" alt="Favorites screen with pinned replies and notes.">
+        </figure>
+        <figure class="phone-frame ios-phone-front">
+          <img src="./assets/iphone-keyboard.png" width="690" height="1500" loading="lazy" alt="Clipboard Pro+ keyboard showing saved clips in a conversation.">
+        </figure>
+        <span class="ios-visual-label">YOUR CLIPS, WHERE YOU TYPE</span>
+      </div>
+      <div class="platform-copy">
+        <p class="section-label">For iPhone &amp; iPad</p>
+        <h2 id="ios-title">Save it here.<br><span>Use it where you type.</span></h2>
+        <p class="section-intro">Collect the words you reach for most, then bring them back without digging through old conversations or notes.</p>
+        <ul class="feature-list">
+          <li><span class="feature-number">01</span><div><strong>Search your history</strong><p>Find saved text and links in one place.</p></div></li>
+          <li><span class="feature-number">02</span><div><strong>Pin favorite replies</strong><p>Keep repeat answers, templates, and notes close.</p></div></li>
+          <li><span class="feature-number">03</span><div><strong>Save from Share</strong><p>Bring text and web links in from other apps.</p></div></li>
+          <li><span class="feature-number">04</span><div><strong>Paste from the keyboard</strong><p>Use saved clips in chats, forms, and documents.</p></div></li>
+        </ul>
+        <p class="platform-note">Clipboard tracking on iPhone and iPad works while the main app is active. The saved-clips keyboard needs setup. Premium adds tags, Smart Collections, optional iCloud sync, and AI tools on supported devices.</p>
+      </div>
     </section>
 
-    <section class="card">
-      <h2>App Store URLs</h2>
-      <p class="muted">These public pages are intended for the App Store Connect listing.</p>
-      <ul>
-        <li>Marketing URL: <a href="https://mahmoudfotta.github.io/Clipboard-pro-plus/">mahmoudfotta.github.io/Clipboard-pro-plus/</a></li>
-        <li>Support URL: <a href="https://mahmoudfotta.github.io/Clipboard-pro-plus/support/">mahmoudfotta.github.io/Clipboard-pro-plus/support/</a></li>
-        <li>Privacy Policy URL: <a href="https://mahmoudfotta.github.io/Clipboard-pro-plus/privacy-policy/">mahmoudfotta.github.io/Clipboard-pro-plus/privacy-policy/</a></li>
-      </ul>
+    <section class="ai-section shell" id="ai" aria-labelledby="ai-title">
+      <div class="ai-panel">
+        <div class="ai-copy">
+          <p class="section-label"><span class="ai-label-star" aria-hidden="true">✦</span> AI tools for iPhone &amp; iPad</p>
+          <h2 id="ai-title">Your clips,<br><span>with a little more clarity.</span></h2>
+          <p class="section-intro">On supported devices, Apple Intelligence helps you make more of the text you have already saved. The work happens on your device.</p>
+          <ul class="ai-feature-list">
+            <li><span class="ai-feature-icon" aria-hidden="true">≡</span><div><strong>Find the point</strong><p>Turn a long clip into a short summary and a useful title.</p></div></li>
+            <li><span class="ai-feature-icon" aria-hidden="true">✎</span><div><strong>Rewrite your way</strong><p>Try a professional, friendly, shorter, corrected, or bulleted version.</p></div></li>
+            <li><span class="ai-feature-icon" aria-hidden="true">#</span><div><strong>Keep it organized</strong><p>Get suggested tags so saved text is easier to find again.</p></div></li>
+          </ul>
+          <p class="ai-note">Requires Premium, iOS or iPadOS 26+, and a compatible device with Apple Intelligence enabled.</p>
+        </div>
+        <div class="ai-visual">
+          <div class="ai-orbit" aria-hidden="true"></div>
+          <div class="ai-orbit ai-orbit-small" aria-hidden="true"></div>
+          <figure class="phone-frame ai-phone">
+            <img src="./assets/iphone-ai.png" width="690" height="1500" loading="lazy" alt="Clipboard Pro+ AI Tools screen showing a summary, smart title, and suggested tags for a saved clip.">
+          </figure>
+          <span class="ai-float ai-float-top" aria-hidden="true">✦ &nbsp;Summarize</span>
+          <span class="ai-float ai-float-bottom" aria-hidden="true"># &nbsp;Suggest tags</span>
+        </div>
+      </div>
     </section>
 
-    <p class="footer">Repository: <a href="https://github.com/mahmoudfotta/Clipboard-pro-plus">github.com/mahmoudfotta/Clipboard-pro-plus</a></p>
+    <section class="mac-section" id="mac" aria-labelledby="mac-title">
+      <div class="shell mac-layout">
+        <div class="mac-copy">
+          <p class="section-label light"><span class="preview-dot" aria-hidden="true"></span> Native Mac app · available now</p>
+          <h2 id="mac-title">Your clipboard,<br><span>at your fingertips.</span></h2>
+          <p class="section-intro">The Mac app gives copied text and links a searchable place to land. Open it from the menu bar or a keyboard shortcut, then copy a result for use in another app.</p>
+          <div class="mac-features">
+            <div><span aria-hidden="true">✦</span><strong>Opt-in background capture</strong><p>Keep supported text and links while you work.</p></div>
+            <div><span aria-hidden="true">⌘</span><strong>Search by shortcut</strong><p>Get back to clips, Favorites, and tags quickly.</p></div>
+            <div><span aria-hidden="true">↗</span><strong>Optional iCloud sync</strong><p>Use one library with compatible app versions.</p></div>
+          </div>
+          <p class="mac-note">Automatic capture, tag editing, and iCloud sync require Premium. Requires macOS 15.4 or later.</p>
+          <div class="mac-actions">
+            <a class="home-button secondary" href="https://apps.apple.com/us/app/clipboard-pro-paste-manager/id6761011158" target="_blank" rel="noopener noreferrer">Get Clipboard Pro+ for Mac <span aria-hidden="true">↗</span></a>
+            <a class="text-link light-link" href="./mac-privacy-policy/">Read the Mac privacy policy <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        <figure class="mac-window mac-showcase">
+          <div class="window-bar dark"><span class="traffic-lights" aria-hidden="true"><i></i><i></i><i></i></span><span>Clipboard Pro+ · Search</span></div>
+          <img src="./assets/mac-search.png" width="1600" height="1067" loading="lazy" alt="Dark Mac search view showing a search for launch notes, matching clips, tags, and a copy action.">
+        </figure>
+      </div>
+    </section>
+
+    <section class="resources-section shell" id="resources" aria-labelledby="resources-title">
+      <div class="resources-heading">
+        <div><p class="section-label">Help &amp; transparency</p><h2 id="resources-title">The details are close by.</h2></div>
+        <p>Setup help and clear privacy information for every device.</p>
+      </div>
+      <div class="resource-grid">
+        <a class="resource-card" href="./support/"><span class="resource-mark" aria-hidden="true">?</span><strong>Support</strong><span>Get help with tracking, the keyboard, Share, purchases, and sync.</span><b aria-hidden="true">↗</b></a>
+        <a class="resource-card" href="./privacy-policy/"><span class="resource-mark" aria-hidden="true">◈</span><strong>iPhone &amp; iPad privacy</strong><span>See how the mobile app stores clips and handles optional services.</span><b aria-hidden="true">↗</b></a>
+        <a class="resource-card" href="./mac-privacy-policy/"><span class="resource-mark" aria-hidden="true">⌘</span><strong>Mac privacy</strong><span>Learn about capture controls, local storage, and Mac permissions.</span><b aria-hidden="true">↗</b></a>
+      </div>
+    </section>
+
+    <section class="closing-section shell" aria-labelledby="closing-title">
+      <div class="closing-panel">
+        <div><p class="section-label light">Ready when you are</p><h2 id="closing-title">Keep your best words within reach.</h2><p>Available for iPhone, iPad, and Mac.</p></div>
+        <a class="home-button closing-button" href="https://apps.apple.com/us/app/clipboard-pro-paste-manager/id6761011158" target="_blank" rel="noopener noreferrer">Get Clipboard Pro+ <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
   </main>
+
+  <footer class="site-footer shell">
+    <div class="footer-brand"><img src="./assets/app-icon.png" width="34" height="34" alt=""><span>Clipboard Pro+</span></div>
+    <p>Useful words deserve a second life.</p>
+    <nav aria-label="Footer navigation"><a href="./support/">Support</a><a href="./privacy-policy/">iPhone &amp; iPad Privacy</a><a href="./mac-privacy-policy/">Mac Privacy</a><a href="mailto:clipboardproplus@gmail.com">Contact</a></nav>
+    <small>© 2026 Clipboard Pro+</small>
+  </footer>
+  <script src="./home-motion.js?v=20260923-5" defer></script>
 </body>
 </html>
