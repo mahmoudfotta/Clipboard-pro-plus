@@ -41,3 +41,10 @@ The homepage images are resized from the approved icon and native iOS/Mac
 captures in `AppStore/iOS-Campaign/` and `AppStore/Mac/Screenshots/source/`.
 The AI section uses the native iPhone AI Tools capture and describes its
 Premium, operating-system, and Apple Intelligence requirements.
+
+## Link preview
+
+The home page declares Open Graph and X large-image card metadata in
+`index.html`. The card image is `assets/social-preview.png` (1200 × 630).
+Keep its absolute image URL in the metadata in sync with the published Pages
+URL when changing the site address or preview artwork.
