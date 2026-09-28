@@ -1,0 +1,212 @@
+/* Homepage motion layer, on top of home.css and ai.css. Rules that change
+   layout or hide content are gated on .fx-on, which home-motion.js adds only
+   when motion is allowed, so the page reads the same without the script. */
+
+@property --fx-in { syntax: "<number>"; inherits: true; initial-value: 1; }
+@property --fx-par { syntax: "<number>"; inherits: true; initial-value: 0; }
+
+/* Reading progress along the top edge. */
+.home .fx-progress { position: fixed; inset: 0 0 auto; z-index: 60; height: 3px; pointer-events: none; }
+.home .fx-progress span { display: block; height: 100%; transform: scaleX(var(--fx-progress, 0)); transform-origin: left; background: linear-gradient(90deg, #5856d6, #8f7cf0 55%, #1f5cbf); box-shadow: 0 0 12px rgba(88, 86, 214, 0.45); }
+
+/* Header floats as a glass capsule once the page scrolls. */
+@media (min-width: 901px) {
+  .home.fx-on .site-header { position: sticky; top: 0; z-index: 40; width: min(100%, 1320px); border: 1px solid transparent; border-radius: 0; transition: top 420ms cubic-bezier(0.16, 1, 0.3, 1), width 420ms cubic-bezier(0.16, 1, 0.3, 1), min-height 420ms cubic-bezier(0.16, 1, 0.3, 1), padding 420ms cubic-bezier(0.16, 1, 0.3, 1), border-radius 420ms ease, background-color 320ms ease, box-shadow 320ms ease, border-color 320ms ease; }
+  .home.fx-on .site-header.is-scrolled { top: 12px; width: min(100% - 32px, 1180px); min-height: 66px; padding-inline: 12px 10px; border-color: rgba(255, 255, 255, 0.7); border-radius: 22px; background: rgba(250, 249, 246, 0.72); -webkit-backdrop-filter: blur(20px) saturate(1.6); backdrop-filter: blur(20px) saturate(1.6); box-shadow: 0 1px 0 rgba(20, 26, 56, 0.05), 0 18px 40px rgba(20, 26, 56, 0.1); }
+  .home.fx-on .site-header .brand img { transition: width 420ms ease, height 420ms ease, transform 420ms cubic-bezier(0.34, 1.56, 0.64, 1); }
+  .home.fx-on .site-header.is-scrolled .brand img { width: 36px; height: 36px; }
+  .home.fx-on .brand:hover img { transform: rotate(-8deg) scale(1.06); }
+
+  /* Scroll-spy pill behind the nav link for the section in view. */
+  .home.fx-on .site-nav { position: relative; gap: 2px; padding: 5px; border-radius: 999px; }
+  .home.fx-on .site-nav a { position: relative; z-index: 1; padding: 8px 14px; border-radius: 999px; transition: color 220ms ease; }
+  .home.fx-on .site-nav a::after { display: none; }
+  .home.fx-on .site-nav a.is-pill-target { color: var(--home-ink); }
+  .home .fx-pill { position: absolute; z-index: 0; top: 5px; bottom: 5px; left: 0; width: var(--pill-w, 0); transform: translateX(var(--pill-x, 0)); border-radius: 999px; background: #fff; box-shadow: 0 1px 2px rgba(20, 26, 56, 0.08), 0 6px 16px rgba(88, 86, 214, 0.16); opacity: var(--pill-o, 0); transition: transform 460ms cubic-bezier(0.16, 1, 0.3, 1), width 460ms cubic-bezier(0.16, 1, 0.3, 1), opacity 220ms ease; }
+}
+.home .fx-pill { display: none; }
+@media (min-width: 901px) { .home .fx-pill { display: block; } }
+
+/* Buttons: a light sweep on hover and a gentle magnetic pull. */
+.home .home-button, .home .nav-cta { position: relative; overflow: hidden; }
+.home .home-button::after, .home .nav-cta::after { content: ""; position: absolute; inset: 0; background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.35) 50%, transparent 65%); transform: translateX(-120%); pointer-events: none; }
+.home .home-button.secondary::after { background: linear-gradient(105deg, transparent 35%, rgba(88, 86, 214, 0.12) 50%, transparent 65%); }
+.home .home-button:hover::after, .home .nav-cta:hover::after { transform: translateX(120%); transition: transform 750ms ease; }
+.home .fx-magnet { translate: var(--mx, 0) var(--my, 0); transition: translate 380ms cubic-bezier(0.16, 1, 0.3, 1), transform 300ms ease, box-shadow 300ms ease, background-color 300ms ease; }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Hero title: words rise out of a mask, then the last line shimmers. */
+  .home.fx-on .hero-copy > h1 { animation: none; }
+  .home .hero-copy h1 .fx-word, .home .hero-copy h1 .fx-word > span { color: inherit; }
+  .home .fx-word { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.1em; margin-bottom: -0.1em; }
+  .home .fx-word > span { display: inline-block; animation: fx-word 900ms cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: calc(120ms + var(--i) * 70ms); }
+  .home .hero-copy h1 > span .fx-word > span { background: linear-gradient(90deg, #5856d6, #8f7cf0 30%, #1f5cbf 60%, #5856d6); background-size: 300% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: fx-word 900ms cubic-bezier(0.16, 1, 0.3, 1) both, fx-shimmer 7s linear 1.4s infinite; animation-delay: calc(120ms + var(--i) * 70ms), 1.4s; }
+  .home .kicker-dot { animation: fx-pulse 2.4s ease-out infinite; }
+
+  /* Hero stage: rotating halo ring, drifting devices, and a copy toast. */
+  .home .visual-halo::before { content: ""; position: absolute; inset: 64px; border-radius: 50%; background: conic-gradient(from 0deg, transparent 0 62%, rgba(88, 86, 214, 0.55) 80%, rgba(143, 124, 240, 0.1) 92%, transparent 100%); -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1.5px)); mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1.5px)); animation: fx-spin 12s linear infinite; }
+  .home .visual-halo { animation: fx-breathe 9s ease-in-out infinite alternate; }
+  .home.fx-on .hero-mac { animation: home-device-enter 700ms cubic-bezier(0.16, 1, 0.3, 1) 100ms both, fx-bob-mac 8s ease-in-out 900ms infinite alternate; }
+  .home.fx-on .hero-phone { animation: fx-phone-enter 900ms cubic-bezier(0.16, 1, 0.3, 1) 260ms both, fx-bob-phone 6s ease-in-out 1.2s infinite alternate; }
+  .home.fx-on .floating-chip { animation: fx-chip-enter 700ms cubic-bezier(0.34, 1.56, 0.64, 1) 520ms both, fx-bob-chip 5s ease-in-out 1.3s infinite alternate; }
+  .home .floating-chip span { animation: fx-spin-star 6s ease-in-out 1.5s infinite; }
+
+  /* Benefit steps light up one after another. */
+  .home .benefit-bar strong { animation: fx-step 4.5s ease-in-out infinite; }
+  .home .benefit-bar > span:nth-of-type(3) strong { animation-delay: 1.5s; }
+  .home .benefit-bar > span:nth-of-type(5) strong { animation-delay: 3s; }
+  .home .benefit-arrow { animation: fx-nudge 1.8s ease-in-out infinite; }
+
+  /* Staggered reveal for copy blocks and list items. */
+  .home .reveal-pending { transition-delay: calc(var(--d, 0) * 75ms); }
+
+  /* Section stages ease in as each chapter enters, then drift with scroll. */
+  .home.fx-on .ios-section, .home.fx-on .ai-section, .home.fx-on .mac-section { transition: --fx-in 1300ms cubic-bezier(0.16, 1, 0.3, 1); }
+  .home.fx-on .ios-section:not(.is-entered), .home.fx-on .ai-section:not(.is-entered), .home.fx-on .mac-section:not(.is-entered) { --fx-in: 0; }
+  .home.fx-on .ios-phone-back { opacity: calc(var(--fx-in) * 1.4 - 0.2); translate: calc((1 - var(--fx-in)) * 110px) calc((1 - var(--fx-in)) * 60px + var(--fx-par) * -34px); }
+  .home.fx-on .ios-phone-front { opacity: calc(var(--fx-in) * 1.4 - 0.2); translate: calc((1 - var(--fx-in)) * -90px) calc((1 - var(--fx-in)) * 140px + var(--fx-par) * 34px); }
+  .home.fx-on .ios-glow { scale: calc(0.6 + var(--fx-in) * 0.4); translate: calc(var(--fx-par) * 40px) 0; }
+  .home.fx-on .ios-visual-label { opacity: var(--fx-in); letter-spacing: calc(0.17em + (1 - var(--fx-in)) * 0.4em); }
+  .home.fx-on .ai-phone { opacity: calc(var(--fx-in) * 1.4 - 0.2); translate: 0 calc((1 - var(--fx-in)) * 160px + var(--fx-par) * -30px); }
+  .home.fx-on .ai-orbit { scale: calc(0.7 + var(--fx-in) * 0.3); opacity: var(--fx-in); }
+  .home.fx-on .ai-float-top { translate: calc((1 - var(--fx-in)) * -80px) calc(var(--fx-par) * 46px); opacity: var(--fx-in); }
+  .home.fx-on .ai-float-bottom { translate: calc((1 - var(--fx-in)) * 80px) calc(var(--fx-par) * -40px); opacity: var(--fx-in); }
+  .home.fx-on .mac-layout { perspective: 1800px; }
+  .home.fx-on .mac-showcase { opacity: calc(var(--fx-in) * 1.3 - 0.1); transform-origin: 50% 100%; rotate: x calc((1 - var(--fx-in)) * 24deg); scale: calc(0.9 + var(--fx-in) * 0.1); translate: 0 calc((1 - var(--fx-in)) * 90px + var(--fx-par) * -26px); }
+
+  /* AI orbits carry small satellites; floating chips bob. */
+  .home .ai-orbit::before, .home .ai-orbit::after { content: ""; position: absolute; top: 50%; left: -5px; width: 10px; height: 10px; margin-top: -5px; border-radius: 50%; background: #6d5ce0; box-shadow: 0 0 0 5px rgba(109, 92, 224, 0.15), 0 0 16px rgba(109, 92, 224, 0.6); }
+  .home .ai-orbit::after { left: auto; right: -4px; width: 7px; height: 7px; background: #9c8ef5; }
+  .home .ai-orbit { animation: fx-spin 40s linear infinite; }
+  .home .ai-orbit-small { animation: fx-spin 28s linear infinite reverse; }
+  .home .ai-float-top { animation: fx-bob-ai-top 5.5s ease-in-out infinite alternate; }
+  .home .ai-float-bottom { animation: fx-bob-ai-bottom 6.5s ease-in-out infinite alternate; }
+  .home .ai-label-star { animation: fx-spin-star 5s ease-in-out infinite; }
+
+  /* Twinkling points of light behind the Mac chapter. */
+  .home .mac-section::after { content: ""; position: absolute; inset: 0; pointer-events: none; background-image: radial-gradient(1.5px 1.5px at 12% 22%, #fff9, transparent), radial-gradient(1px 1px at 28% 78%, #fff8, transparent), radial-gradient(1.5px 1.5px at 44% 12%, #c7c7ff, transparent), radial-gradient(1px 1px at 58% 88%, #fff7, transparent), radial-gradient(2px 2px at 72% 18%, #b8b5ffaa, transparent), radial-gradient(1px 1px at 86% 64%, #fff9, transparent), radial-gradient(1.5px 1.5px at 94% 32%, #fff6, transparent), radial-gradient(1px 1px at 6% 58%, #c7c7ff, transparent); animation: fx-twinkle 5s ease-in-out infinite alternate; }
+  .home .mac-features > div > span { transition: transform 420ms cubic-bezier(0.34, 1.56, 0.64, 1), background-color 300ms ease; }
+  .home .mac-features > div:hover > span { transform: rotate(-10deg) scale(1.12); background: #ffffff26; }
+
+  /* Closing panel: slow-moving gradient and a soft light that drifts. */
+  .home .closing-panel { position: relative; overflow: hidden; isolation: isolate; background-size: 200% 200%; animation: fx-panel 14s ease-in-out infinite alternate; }
+  .home .closing-panel::before { content: ""; position: absolute; z-index: -1; width: 420px; height: 420px; right: -120px; top: -180px; border-radius: 50%; background: radial-gradient(circle, rgba(184, 181, 255, 0.45), transparent 65%); animation: fx-drift 12s ease-in-out infinite alternate; }
+  .home .closing-panel::after { content: ""; position: absolute; z-index: -1; inset: 0; background-image: radial-gradient(rgba(255, 255, 255, 0.09) 1px, transparent 1px); background-size: 22px 22px; -webkit-mask: linear-gradient(100deg, transparent 40%, #000); mask: linear-gradient(100deg, transparent 40%, #000); }
+}
+
+/* Copy toast that pops next to the phone. */
+.home .fx-toast { display: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .home.fx-on .fx-toast { position: absolute; z-index: 3; top: 104px; right: 150px; display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px 9px 9px; border-radius: 13px; background: rgba(20, 26, 56, 0.92); color: #fff; font-size: 12px; font-weight: 700; white-space: nowrap; box-shadow: 0 14px 30px rgba(20, 26, 56, 0.28); animation: fx-toast 6s cubic-bezier(0.34, 1.56, 0.64, 1) 2s infinite; opacity: 0; }
+  .home .fx-toast i { display: grid; place-items: center; width: 20px; height: 20px; border-radius: 6px; background: #34c759; font-style: normal; font-size: 11px; }
+}
+
+/* Resource cards: cursor spotlight and a slight 3D tilt. */
+.home .resource-card { isolation: isolate; overflow: hidden; }
+.home .resource-card::before { content: ""; position: absolute; z-index: -1; inset: 0; border-radius: inherit; background: radial-gradient(260px circle at var(--sx, 50%) var(--sy, 0%), rgba(88, 86, 214, 0.12), transparent 70%); opacity: 0; transition: opacity 300ms ease; }
+.home .resource-card:hover::before { opacity: 1; }
+.home .resource-mark { transition: transform 420ms cubic-bezier(0.34, 1.56, 0.64, 1), background-color 300ms ease, color 300ms ease; }
+.home .resource-card:hover .resource-mark { transform: rotate(-8deg) scale(1.1); background: var(--home-indigo); color: #fff; }
+.home .resource-card b { transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1); }
+.home .resource-card:hover b { transform: translate(3px, -3px); }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .home.fx-on .resource-card:hover { transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-5px); }
+  .home.fx-on .hero-visual { transform: perspective(1400px) rotateX(calc(var(--ty, 0) * -5deg)) rotateY(calc(var(--tx, 0) * 7deg)); transition: transform 800ms cubic-bezier(0.16, 1, 0.3, 1); }
+  .home.fx-on .hero-mac { translate: calc(var(--tx, 0) * -12px) calc(var(--ty, 0) * -10px); transition: translate 800ms cubic-bezier(0.16, 1, 0.3, 1); }
+  .home.fx-on .hero-phone { translate: calc(var(--tx, 0) * 20px) calc(var(--ty, 0) * 16px); transition: translate 800ms cubic-bezier(0.16, 1, 0.3, 1); }
+  .home.fx-on .floating-chip { translate: calc(var(--tx, 0) * 28px) calc(var(--ty, 0) * 22px); transition: translate 800ms cubic-bezier(0.16, 1, 0.3, 1); }
+}
+
+/* Back to top, with a ring that fills as you scroll. */
+.home .fx-top { position: fixed; right: clamp(16px, 3vw, 32px); bottom: clamp(16px, 3vw, 32px); z-index: 50; display: grid; place-items: center; width: 50px; height: 50px; padding: 0; border: 0; border-radius: 50%; background: rgba(20, 26, 56, 0.92); color: #fff; cursor: pointer; box-shadow: 0 14px 30px rgba(20, 26, 56, 0.25); opacity: 0; transform: translateY(16px) scale(0.85); pointer-events: none; transition: opacity 260ms ease, transform 360ms cubic-bezier(0.34, 1.56, 0.64, 1), background-color 200ms ease; }
+.home .fx-top.is-visible { opacity: 1; transform: none; pointer-events: auto; }
+.home .fx-top:hover { background: var(--home-indigo); }
+.home .fx-top svg { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+.home .fx-top circle { fill: none; stroke-width: 2.5; }
+.home .fx-top .ring-track { stroke: rgba(255, 255, 255, 0.14); }
+.home .fx-top .ring-fill { stroke: #b8b5ff; stroke-linecap: round; stroke-dasharray: 138.2; stroke-dashoffset: calc(138.2 * (1 - var(--fx-progress, 0))); }
+.home .fx-top b { position: relative; font-size: 18px; line-height: 1; transition: transform 240ms ease; }
+.home .fx-top:hover b { transform: translateY(-2px); }
+
+@media (max-width: 640px) {
+  .home .phone-frame { padding: 8px; }
+  .home.fx-on .fx-toast { top: 40px; right: 24px; font-size: 11px; }
+  .home .fx-top { width: 46px; height: 46px; }
+}
+
+@keyframes fx-word { from { transform: translateY(110%) rotate(4deg); } }
+@keyframes fx-shimmer { to { background-position: -300% 0; } }
+@keyframes fx-pulse { 0% { box-shadow: 0 0 0 0 rgba(88, 86, 214, 0.5); } 70%, 100% { box-shadow: 0 0 0 10px rgba(88, 86, 214, 0); } }
+@keyframes fx-spin { to { rotate: 360deg; } }
+@keyframes fx-breathe { to { scale: 1.06; } }
+@keyframes fx-chip-enter { from { opacity: 0; transform: rotate(-12deg) scale(0.6); } }
+@keyframes fx-bob-mac { to { transform: rotate(-1.2deg) translateY(-8px); } }
+@keyframes fx-bob-phone { from { transform: rotate(7deg); } to { transform: rotate(5.5deg) translateY(-14px); } }
+@keyframes fx-bob-chip { from { transform: rotate(-3deg); } to { transform: rotate(-1deg) translateY(-10px); } }
+@keyframes fx-spin-star { 0%, 70% { transform: rotate(0); } 85% { transform: rotate(200deg) scale(1.15); } 100% { transform: rotate(360deg); } }
+@keyframes fx-step { 0%, 30%, 100% { background: #eeedff; color: var(--home-indigo); transform: none; } 8%, 22% { background: var(--home-indigo); color: #fff; transform: scale(1.12); box-shadow: 0 6px 16px rgba(88, 86, 214, 0.35); } }
+@keyframes fx-nudge { 0%, 100% { transform: translateX(-3px); opacity: 0.6; } 50% { transform: translateX(4px); opacity: 1; } }
+@keyframes fx-bob-ai-top { from { transform: rotate(-6deg); } to { transform: rotate(-4deg) translateY(-12px); } }
+@keyframes fx-bob-ai-bottom { from { transform: rotate(5deg); } to { transform: rotate(3deg) translateY(10px); } }
+@keyframes fx-twinkle { from { opacity: 0.35; } to { opacity: 1; } }
+@keyframes fx-panel { to { background-position: 100% 100%; } }
+@keyframes fx-drift { to { transform: translate(-160px, 120px) scale(1.2); } }
+@keyframes fx-toast { 0%, 100% { opacity: 0; transform: translateY(10px) scale(0.85); } 8%, 45% { opacity: 1; transform: none; } 55% { opacity: 0; transform: translateY(-8px) scale(0.95); } }
+
+/* Realistic iPhone frame: a proper bezel, titanium edge, and side buttons so
+   the screen never touches the frame. Proportions scale with the frame width. */
+.home .phone-frame { aspect-ratio: 0.482; padding: 10px; border: 1.5px solid #6b6876; border-radius: 17% / 8.2%; background: linear-gradient(145deg, #34313c, #0c0c10 42%, #1b1a20 70%, #3a3742); box-shadow: inset 0 0 0 2px #0b0b0e, inset 0 0 0 3.5px rgba(255, 255, 255, 0.08), 0 30px 60px rgba(18, 20, 47, 0.26), 0 6px 14px rgba(18, 20, 47, 0.14); }
+.home .phone-frame img, .home .hero-phone img, .home .ios-phone-back img, .home .ios-phone-front img, .home .ai-phone img { border-radius: 13.5% / 6.3%; object-position: top; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4); }
+.home .phone-frame::after, .home .hero-phone::after { top: 3.2%; width: 30%; height: 3.6%; background: #050507; }
+.home .phone-frame::before { content: ""; position: absolute; right: -4px; top: 24%; width: 3px; height: 13%; border-radius: 0 3px 3px 0; background: linear-gradient(90deg, #2a2830, #4a4754); box-shadow: -1px 0 0 rgba(0, 0, 0, 0.3); }
+
+/* Headline words keep their spacing after being split into spans. */
+.home h1 .fx-word, .home h2 .fx-word { margin-right: 0.24em; }
+.home h1 .fx-word:last-child, .home h2 .fx-word:last-child { margin-right: 0; }
+.home h2 span.fx-word, .home h2 .fx-word > span { color: inherit; }
+
+/* Clip stream: saved snippets drift past in two directions. */
+.home .fx-stream { display: grid; gap: 12px; margin: -20px 0 40px; overflow: hidden; -webkit-mask: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+.home .fx-stream-row { display: flex; gap: 12px; width: max-content; }
+.home .fx-stream-row span { display: inline-flex; align-items: center; gap: 10px; padding: 11px 16px 11px 11px; border: 1px solid #e2e1ec; border-radius: 14px; background: rgba(255, 255, 255, 0.85); color: #2d3553; font-size: 14px; font-weight: 650; white-space: nowrap; box-shadow: 0 8px 20px rgba(32, 34, 74, 0.05); }
+.home .fx-stream-row i { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 8px; background: #fff1e3; color: #e08a2c; font-style: normal; font-size: 13px; }
+.home .fx-stream-row i.link { background: #e6f0ff; color: #2f6fe0; }
+.home .fx-stream-row i.tag { background: #eeedff; color: var(--home-indigo); }
+.home .fx-stream-row i.pin { background: #fff7d6; color: #d19a00; }
+
+/* Pointer light that follows the cursor across the hero. */
+.home .fx-glow { display: none; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .home .fx-stream-row { animation: fx-marquee 48s linear infinite; }
+  .home .fx-stream-row:nth-child(2) { animation-direction: reverse; animation-duration: 56s; }
+  .home .fx-stream:hover .fx-stream-row { animation-play-state: paused; }
+
+  /* Bolder hero entrance: devices swing in from depth. */
+  .home.fx-on .hero-visual { perspective: 1600px; }
+  .home.fx-on .hero-mac { animation: fx-mac-enter 1200ms cubic-bezier(0.16, 1, 0.3, 1) 150ms both, fx-bob-mac 8s ease-in-out 1.4s infinite alternate; }
+  .home.fx-on .hero-phone { animation: fx-phone-enter 1200ms cubic-bezier(0.16, 1, 0.3, 1) 420ms both, fx-bob-phone 6s ease-in-out 1.7s infinite alternate; }
+  .home.fx-on .visual-halo { animation: fx-halo-enter 1400ms cubic-bezier(0.16, 1, 0.3, 1) both, fx-breathe 9s ease-in-out 1.4s infinite alternate; }
+
+  /* Reveals travel further and come into focus. */
+  .home.fx-on .reveal-pending { opacity: 0; translate: 0 44px; filter: blur(8px); transition: opacity 700ms ease-out, translate 900ms cubic-bezier(0.16, 1, 0.3, 1), filter 700ms ease-out; transition-delay: calc(var(--d, 0) * 90ms); }
+  .home.fx-on .reveal-pending.is-revealed { opacity: 1; translate: 0 0; filter: none; }
+  .home.fx-on .resource-card.reveal-pending { transition-property: opacity, translate, filter, transform, box-shadow; transition-duration: 700ms, 900ms, 700ms, 300ms, 300ms; transition-delay: calc(var(--d, 0) * 90ms), calc(var(--d, 0) * 90ms), calc(var(--d, 0) * 90ms), 0ms, 0ms; }
+
+  /* Section headings rise word by word once revealed. */
+  .home.fx-on .fx-split.reveal-pending { opacity: 1; translate: none; filter: none; }
+  .home.fx-on .fx-split .fx-word > span { transform: translateY(115%) rotate(5deg); transition: transform 1000ms cubic-bezier(0.16, 1, 0.3, 1); transition-delay: calc(var(--d, 0) * 90ms + var(--i) * 60ms); }
+  .home.fx-on .fx-split.is-revealed .fx-word > span { transform: none; }
+
+  /* Mac chapter opens from a card to full width as it scrolls in. */
+  .home.fx-on .mac-section { clip-path: inset(0 calc((1 - var(--fx-open, 1)) * 5vw) round calc((1 - var(--fx-open, 1)) * 56px)); }
+
+  .home .fx-glow { position: absolute; z-index: 0; top: 0; left: 0; display: block; width: 560px; height: 560px; margin: -280px 0 0 -280px; border-radius: 50%; background: radial-gradient(circle, rgba(143, 124, 240, 0.22), transparent 62%); pointer-events: none; translate: var(--gx, 70vw) var(--gy, 300px); transition: translate 900ms cubic-bezier(0.16, 1, 0.3, 1); }
+  .home .hero-section { position: relative; }
+  .home .hero-copy, .home .hero-visual { position: relative; z-index: 1; }
+}
+
+@keyframes fx-marquee { to { transform: translateX(-50%); } }
+@keyframes fx-mac-enter { from { opacity: 0; transform: rotate(-2deg) rotateY(-28deg) translate(80px, 40px) scale(0.86); filter: blur(10px); } to { opacity: 1; transform: rotate(-2deg); filter: none; } }
+@keyframes fx-phone-enter { from { opacity: 0; transform: rotate(22deg) rotateY(30deg) translate(120px, 160px) scale(0.8); filter: blur(10px); } to { opacity: 1; transform: rotate(7deg); filter: none; } }
+@keyframes fx-halo-enter { from { opacity: 0; scale: 0.5; } }

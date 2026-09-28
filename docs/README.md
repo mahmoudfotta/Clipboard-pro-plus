@@ -13,7 +13,7 @@ step or external runtime dependency.
 
 ## Enable GitHub Pages
 
-1. Copy this entire `docs/` folder, including `assets/`, `home.css`, `ai.css`, `home-motion.js`, and all policy pages, into the public repository `https://github.com/mahmoudfotta/Clipboard-pro-plus.git`.
+1. Copy this entire `docs/` folder, including `assets/`, `home.css`, `ai.css`, `home-motion.js`, `info.css`, `info-motion.js`, and all policy pages, into the public repository `https://github.com/mahmoudfotta/Clipboard-pro-plus.git`.
 2. Push that repository.
 3. Open the public repository on GitHub.
 4. Go to `Settings` > `Pages`.
@@ -47,4 +47,6 @@ Premium, operating-system, and Apple Intelligence requirements.
 The home page declares Open Graph and X large-image card metadata in
 `index.html`. The card image is `assets/social-preview.png` (1200 × 630).
 Keep its absolute image URL in the metadata in sync with the published Pages
-URL when changing the site address or preview artwork.
+URL when changing the site address or preview artwork. The card is built from
+`AppStore/Social-Preview/social-preview.html`; run `render.sh` there to
+regenerate the PNG, then bump the `?v=` on both image URLs so X refetches it.

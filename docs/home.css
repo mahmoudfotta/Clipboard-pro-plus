@@ -144,6 +144,11 @@
 .home .site-footer a { color: #5a6479; font-size: 13px; font-weight: 650; text-decoration: none; }
 .home .site-footer small { grid-column: 2; grid-row: 2; text-align: right; font-size: 12px; }
 
+/* Cross-document transitions to Support and the policy pages (see info.css). */
+@view-transition { navigation: auto; }
+.home .brand { view-transition-name: site-brand; }
+@media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }
+
 /* A drawn line signals each new chapter without shifting the document. */
 .home .ios-section, .home .ai-section, .home .mac-section, .home .resources-section { position: relative; }
 .home .ios-section::before, .home .ai-section::before, .home .mac-section::before, .home .resources-section::before {

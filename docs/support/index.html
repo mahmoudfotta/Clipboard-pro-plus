@@ -6,7 +6,8 @@
   <meta name="description" content="Straight answers for setup, syncing, purchases, and everyday use across iPhone, iPad, and Mac.">
   <title>Clipboard Pro+ Support</title>
   <link rel="icon" type="image/png" href="../assets/app-icon.png">
-  <link rel="stylesheet" href="../site.css?v=20260923-3">
+  <link rel="stylesheet" href="../site.css?v=20260929-1">
+  <link rel="stylesheet" href="../info.css?v=20260929-1">
 </head>
 <body class="info info-support">
   <a class="info-skip" href="#main">Skip to content</a>
@@ -32,6 +33,7 @@
         <h1 id="page-title">Clipboard Pro+ Support</h1>
         <p class="info-hero-description">Straight answers for setup, syncing, purchases, and everyday use across iPhone, iPad, and Mac.</p>
         <p class="info-date">Last updated: September 23, 2026</p>
+        <ul class="info-highlights" aria-label="At a glance"><li><span aria-hidden="true">▯</span>iPhone &amp; iPad</li><li><span aria-hidden="true">⌘</span>Mac</li><li><span aria-hidden="true">↻</span>Sync &amp; purchases</li><li><span aria-hidden="true">✉</span>Email support</li></ul>
       </div>
       <div class="info-hero-visual" aria-hidden="true">
         <div class="info-visual-sheet">
@@ -193,12 +195,6 @@
     <nav aria-label="Footer navigation"><a href="../support/">Support</a><a href="../privacy-policy/">iPhone &amp; iPad Privacy</a><a href="../mac-privacy-policy/">Mac Privacy</a><a href="mailto:clipboardproplus@gmail.com">Contact</a></nav>
     <small>© 2026 Clipboard Pro+</small>
   </footer>
-  <script>
-    const sectionList = document.querySelector('.info-toc-details');
-    const compactLayout = window.matchMedia('(max-width: 700px)');
-    const syncSectionList = () => { sectionList.open = !compactLayout.matches; };
-    syncSectionList();
-    compactLayout.addEventListener('change', syncSectionList);
-  </script>
+  <script src="../info-motion.js?v=20260929-1" defer></script>
 </body>
 </html>

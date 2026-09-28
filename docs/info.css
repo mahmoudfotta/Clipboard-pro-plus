@@ -1,0 +1,153 @@
+/* Support and policy page polish, layered over the .info rules in site.css.
+   Everything here is progressive: without info-motion.js the pages keep the
+   site.css layout, and reduced-motion users get the final state immediately. */
+
+/* Cross-document transitions between Home, Support, and the policy pages. */
+@view-transition { navigation: auto; }
+.info-brand, .home .brand { view-transition-name: site-brand; }
+.info-hero { view-transition-name: page-hero; }
+::view-transition-old(root) { animation: info-vt-out 200ms ease-in both; }
+::view-transition-new(root) { animation: info-vt-in 420ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+::view-transition-group(page-hero) { animation-duration: 460ms; animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1); }
+@keyframes info-vt-out { to { opacity: 0; transform: translateY(-8px); filter: blur(2px); } }
+@keyframes info-vt-in { from { opacity: 0; transform: translateY(14px); } }
+
+/* Reading progress, pinned above the header. */
+.info-progress { position: fixed; inset: 0 0 auto; z-index: 60; height: 3px; pointer-events: none; }
+.info-progress span { display: block; height: 100%; transform: scaleX(var(--info-progress, 0)); transform-origin: left; background: linear-gradient(90deg, #5856d6, #8f7cf0 55%, #1f5cbf); box-shadow: 0 0 12px rgba(88, 86, 214, 0.45); }
+
+/* Glass header that condenses once the page scrolls. */
+.info-nav-pill { display: none; }
+@media (min-width: 701px) {
+  .info-header { position: sticky; top: 0; z-index: 40; transition: background-color 320ms ease, box-shadow 320ms ease, backdrop-filter 320ms ease; }
+  .info-header-inner { transition: min-height 320ms cubic-bezier(0.16, 1, 0.3, 1); }
+  .info-header.is-scrolled { background: rgba(248, 247, 243, 0.74); -webkit-backdrop-filter: blur(18px) saturate(1.5); backdrop-filter: blur(18px) saturate(1.5); box-shadow: 0 1px 0 rgba(20, 26, 56, 0.07), 0 12px 32px rgba(20, 26, 56, 0.06); }
+  .info-header.is-scrolled .info-header-inner { min-height: 70px; }
+  .info-brand img { transition: width 320ms ease, height 320ms ease, transform 420ms cubic-bezier(0.34, 1.56, 0.64, 1); }
+  .info-header.is-scrolled .info-brand img { width: 36px; height: 36px; }
+  .info-brand:hover img { transform: rotate(-8deg) scale(1.06); }
+
+  /* Segmented nav with a pill that follows the pointer. */
+  .info-js .info-nav { position: relative; gap: 2px; padding: 5px; border: 1px solid rgba(20, 26, 56, 0.07); border-radius: 999px; background: rgba(255, 255, 255, 0.6); box-shadow: inset 0 1px 0 #fff, 0 6px 18px rgba(20, 26, 56, 0.05); }
+  .info-js .info-nav a { position: relative; z-index: 1; padding: 8px 15px; border-radius: 999px; transition: color 220ms ease; }
+  .info-js .info-nav a[aria-current="page"] { text-decoration: none; }
+  .info-js .info-nav a.is-pill-target { color: var(--info-ink); }
+  .info-nav-pill { display: block; position: absolute; z-index: 0; top: 5px; bottom: 5px; left: 0; width: var(--pill-w, 0); transform: translateX(var(--pill-x, 0)); border-radius: 999px; background: #fff; box-shadow: 0 1px 2px rgba(20, 26, 56, 0.08), 0 6px 16px rgba(88, 86, 214, 0.14); opacity: var(--pill-o, 0); transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1), width 420ms cubic-bezier(0.16, 1, 0.3, 1), opacity 200ms ease; }
+  .info-nav-pill::after { content: ""; position: absolute; left: 50%; bottom: -1px; width: 16px; height: 2px; margin-left: -8px; border-radius: 2px; background: var(--info-indigo); opacity: var(--pill-current, 0); transition: opacity 200ms ease; }
+
+  .info-toc { top: 96px; max-height: calc(100vh - 120px); }
+  .info-js .info-article h2, .info-js .info-article [lang="ar"] { scroll-margin-top: 110px; }
+}
+
+.info-header .info-contact { position: relative; overflow: hidden; transition: background-color 200ms ease, transform 220ms ease, box-shadow 220ms ease; }
+.info-header .info-contact:hover { transform: translateY(-1px); box-shadow: 0 12px 24px rgba(20, 26, 56, 0.2); }
+.info-header .info-contact::before { content: ""; position: absolute; inset: 0; background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.28) 50%, transparent 65%); transform: translateX(-120%); }
+.info-header .info-contact:hover::before { transform: translateX(120%); transition: transform 700ms ease; }
+
+/* Hero: drifting aurora, highlights, and staged entrance. */
+.info-hero { background-size: 160% 160%; box-shadow: 0 30px 70px rgba(33, 37, 92, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.7); }
+.info-hero::after { content: ""; position: absolute; z-index: -1; width: 520px; height: 520px; left: -160px; bottom: -300px; border-radius: 50%; background: radial-gradient(circle, rgba(143, 124, 240, 0.28), rgba(143, 124, 240, 0) 65%); filter: blur(10px); pointer-events: none; }
+.info-eyebrow::before { animation: info-pulse 2.4s ease-out infinite; }
+.info-highlights { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 0; padding: 0; list-style: none; }
+.info-highlights li { display: inline-flex; align-items: center; gap: 8px; padding: 8px 13px 8px 9px; border: 1px solid rgba(88, 86, 214, 0.16); border-radius: 12px; background: rgba(255, 255, 255, 0.72); color: #2d3553; font-size: 13px; font-weight: 700; box-shadow: 0 6px 16px rgba(33, 37, 92, 0.05); transition: transform 260ms cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 260ms ease, border-color 260ms ease; }
+.info-highlights li:hover { transform: translateY(-2px); border-color: rgba(88, 86, 214, 0.34); box-shadow: 0 12px 24px rgba(33, 37, 92, 0.09); }
+.info-highlights li span { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 7px; background: #eceafe; color: var(--info-indigo); font-size: 12px; }
+.info-hero-visual { translate: calc(var(--px, 0) * 14px) calc(var(--py, 0) * 12px); transition: translate 600ms cubic-bezier(0.16, 1, 0.3, 1); }
+.info-visual-icon { translate: calc(var(--px, 0) * -18px) calc(var(--py, 0) * -14px); transition: translate 600ms cubic-bezier(0.16, 1, 0.3, 1); }
+.info-sheet-line { transform-origin: left; }
+.info-sheet-mark { position: relative; }
+.info-sheet-mark::after { content: ""; position: absolute; inset: -6px; border: 2px solid rgba(88, 86, 214, 0.28); border-radius: 18px; animation: info-ring 2.8s ease-out 1.2s infinite; opacity: 0; }
+
+/* Article sections become quiet cards once the script groups them. */
+.info-js .info-article { counter-reset: info-section; }
+.info-section { position: relative; margin-bottom: 18px; padding: clamp(24px, 3vw, 36px); border: 1px solid #e3e4ee; border-radius: 26px; background: rgba(255, 255, 255, 0.78); box-shadow: 0 16px 40px rgba(28, 32, 74, 0.045); transition: border-color 300ms ease, box-shadow 300ms ease, transform 300ms ease; }
+.info-section.is-active { border-color: #d3d1f3; box-shadow: 0 22px 50px rgba(55, 50, 150, 0.08); }
+.info-section::before { content: ""; position: absolute; left: -1px; top: 30px; bottom: 30px; width: 3px; border-radius: 3px; background: linear-gradient(#5856d6, #a69aec); transform: scaleY(0); transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1); }
+.info-section.is-active::before { transform: scaleY(1); }
+.info-js .info-article .info-section h2 { display: flex; align-items: center; gap: 14px; margin: 0 0 18px; padding: 0; border: 0; counter-increment: info-section; }
+.info-js .info-article .info-section h2::before { content: counter(info-section, decimal-leading-zero); display: grid; place-items: center; flex: none; width: 36px; height: 36px; border-radius: 11px; background: #efeeff; color: var(--info-indigo); font-size: 12px; font-weight: 800; letter-spacing: 0.02em; transition: background-color 300ms ease, color 300ms ease, transform 420ms cubic-bezier(0.34, 1.56, 0.64, 1); }
+.info-js .info-article .info-section.is-active h2::before { background: var(--info-indigo); color: #fff; transform: rotate(-6deg) scale(1.05); }
+.info-section > :last-child { margin-bottom: 0; }
+.info-lede { margin-bottom: 22px !important; padding: 4px 0 0 18px; border-left: 3px solid #a5a0ed; color: #3f4962; font-size: 17px; }
+.info-js .info-article [lang="ar"] { margin-top: 30px; }
+.info-js .info-cross-platform { position: relative; overflow: hidden; background: linear-gradient(125deg, #f2f1fd, #e9ecf8); }
+.info-js .info-cross-platform::after { content: "⌘"; position: absolute; right: 18px; top: 10px; color: rgba(88, 86, 214, 0.1); font-size: 74px; font-weight: 700; line-height: 1; pointer-events: none; }
+
+/* Heading permalink that copies the section URL. */
+.info-anchor { margin-left: auto; display: grid; place-items: center; width: 32px; height: 32px; flex: none; border-radius: 10px; color: #8a8fb0 !important; font-size: 16px; font-weight: 700; text-decoration: none; opacity: 0; transform: translateX(-4px); transition: opacity 200ms ease, transform 200ms ease, background-color 200ms ease, color 200ms ease; }
+.info-section:hover .info-anchor, .info-anchor:focus-visible { opacity: 1; transform: none; }
+.info-anchor:hover { background: #efeeff; color: var(--info-indigo) !important; }
+.info-anchor.is-copied { opacity: 1; background: #e7f6ee; color: #1f8a53 !important; }
+@media (hover: none) { .info-anchor { display: none; } }
+
+/* Table of contents with a marker that tracks the section in view. */
+.info-toc nav { position: relative; }
+.info-toc-marker { position: absolute; left: -1px; top: 0; width: 2px; height: var(--toc-h, 0); border-radius: 2px; background: var(--info-indigo); box-shadow: 0 0 10px rgba(88, 86, 214, 0.5); transform: translateY(var(--toc-y, 0)); opacity: var(--toc-o, 0); transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1), height 420ms cubic-bezier(0.16, 1, 0.3, 1), opacity 240ms ease; }
+.info-toc nav a.is-active { color: var(--info-ink); transform: translateX(4px); }
+.info-toc-meter { display: block; height: 4px; margin: 0 0 18px; border-radius: 999px; background: #e6e7f0; overflow: hidden; }
+.info-toc-meter span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #5856d6, #9b8cf2); transform: scaleX(var(--info-progress, 0)); transform-origin: left; }
+
+/* Back to top, with a ring that fills as you read. */
+.info-top { position: fixed; right: clamp(16px, 3vw, 32px); bottom: clamp(16px, 3vw, 32px); z-index: 50; display: grid; place-items: center; width: 50px; height: 50px; padding: 0; border: 0; border-radius: 50%; background: rgba(20, 26, 56, 0.92); color: #fff; cursor: pointer; box-shadow: 0 14px 30px rgba(20, 26, 56, 0.25); opacity: 0; transform: translateY(16px) scale(0.85); pointer-events: none; transition: opacity 260ms ease, transform 360ms cubic-bezier(0.34, 1.56, 0.64, 1), background-color 200ms ease; }
+.info-top.is-visible { opacity: 1; transform: none; pointer-events: auto; }
+.info-top:hover { background: var(--info-indigo); }
+.info-top:focus-visible { outline: 3px solid var(--info-indigo); outline-offset: 4px; }
+.info-top svg { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+.info-top circle { fill: none; stroke-width: 2.5; }
+.info-top .ring-track { stroke: rgba(255, 255, 255, 0.14); }
+.info-top .ring-fill { stroke: #b8b5ff; stroke-linecap: round; stroke-dasharray: 138.2; stroke-dashoffset: calc(138.2 * (1 - var(--info-progress, 0))); }
+.info-top b { position: relative; font-size: 18px; line-height: 1; transition: transform 240ms ease; }
+.info-top:hover b { transform: translateY(-2px); }
+
+.info-footer a { transition: color 200ms ease; }
+.info-footer-brand img { transition: transform 420ms cubic-bezier(0.34, 1.56, 0.64, 1); }
+.info-footer-brand:hover img { transform: rotate(-10deg) scale(1.08); }
+
+@media (max-width: 700px) {
+  .info-highlights { gap: 6px; }
+  .info-highlights li { padding: 6px 10px 6px 7px; font-size: 12px; }
+  .info-section { padding: 22px 20px; border-radius: 20px; }
+  .info-js .info-article .info-section h2 { gap: 11px; font-size: 22px; }
+  .info-js .info-article .info-section h2::before { width: 30px; height: 30px; border-radius: 9px; font-size: 11px; }
+  .info-toc-meter { display: none; }
+  .info-nav a { transition: background-color 200ms ease, border-color 200ms ease, transform 200ms ease; }
+  .info-nav a:active { transform: scale(0.97); }
+  .info-top { width: 46px; height: 46px; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .info-hero { animation: info-aurora 18s ease-in-out infinite alternate; }
+  .info-hero::after { animation: info-drift 14s ease-in-out infinite alternate; }
+  .info-sheet-line { animation: info-line 700ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+  .info-sheet-line:nth-of-type(2) { animation-delay: 380ms; }
+  .info-sheet-line:nth-of-type(3) { animation-delay: 460ms; }
+  .info-sheet-line:nth-of-type(4) { animation-delay: 540ms; }
+  .info-sheet-line:nth-of-type(5) { animation-delay: 620ms; }
+  .info-highlights li { animation: info-chip 560ms cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+  .info-highlights li:nth-child(1) { animation-delay: 360ms; }
+  .info-highlights li:nth-child(2) { animation-delay: 420ms; }
+  .info-highlights li:nth-child(3) { animation-delay: 480ms; }
+  .info-highlights li:nth-child(4) { animation-delay: 540ms; }
+
+  /* Title words rise out of a mask once split by the script. */
+  .info-word { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+  .info-word > span { display: inline-block; animation: info-word 760ms cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: calc(80ms + var(--i) * 55ms); }
+
+  .info-reveal { opacity: 0; transform: translateY(26px) scale(0.985); transition: opacity 560ms ease-out, transform 700ms cubic-bezier(0.16, 1, 0.3, 1), border-color 300ms ease, box-shadow 300ms ease; }
+  .info-reveal.is-revealed { opacity: 1; transform: none; }
+  .info-reveal:focus-within, :target > .info-reveal, .info-reveal:has(:target) { opacity: 1; transform: none; }
+}
+
+@keyframes info-aurora { to { background-position: 100% 100%; } }
+@keyframes info-drift { to { transform: translate(180px, -60px) scale(1.15); } }
+@keyframes info-pulse { 0% { box-shadow: 0 0 0 0 rgba(88, 86, 214, 0.45); } 70%, 100% { box-shadow: 0 0 0 9px rgba(88, 86, 214, 0); } }
+@keyframes info-ring { 0% { opacity: 0.9; transform: scale(0.9); } 70%, 100% { opacity: 0; transform: scale(1.3); } }
+@keyframes info-line { from { transform: scaleX(0); opacity: 0; } }
+@keyframes info-chip { from { opacity: 0; transform: translateY(10px) scale(0.92); } }
+@keyframes info-word { from { transform: translateY(105%); } }
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+  .info *, .info *::before, .info *::after { animation: none !important; transition: none !important; }
+  .info-hero-visual, .info-visual-icon { translate: none; }
+}
