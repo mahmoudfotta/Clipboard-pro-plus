@@ -210,3 +210,29 @@
 @keyframes fx-mac-enter { from { opacity: 0; transform: rotate(-2deg) rotateY(-28deg) translate(80px, 40px) scale(0.86); filter: blur(10px); } to { opacity: 1; transform: rotate(-2deg); filter: none; } }
 @keyframes fx-phone-enter { from { opacity: 0; transform: rotate(22deg) rotateY(30deg) translate(120px, 160px) scale(0.8); filter: blur(10px); } to { opacity: 1; transform: rotate(7deg); filter: none; } }
 @keyframes fx-halo-enter { from { opacity: 0; scale: 0.5; } }
+
+/* Pip, the Clipboard Pro+ buddy (drawn by pip.js). Tap for a cheer. */
+.home .pip { position: absolute; z-index: 4; aspect-ratio: 1; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.home .pip svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.home .pip:hover svg { filter: drop-shadow(0 0 18px rgba(212, 255, 58, 0.45)); }
+.home .pip-hero { width: 190px; left: 22%; bottom: -78px; }
+.home .closing-panel { position: relative; }
+.home .pip-closing { position: relative; flex: none; width: 150px; margin: -40px -10px -30px auto; }
+.home .closing-panel > div:first-child { flex: 1; }
+
+/* Pip speech bubble that says hello on hover. */
+.home .pip::after { content: "Hi, I'm Pip!"; position: absolute; left: 50%; top: 2%; padding: 7px 12px; border-radius: 12px; background: #1b0f3a; color: #d4ff3a; font-size: 12px; font-weight: 800; white-space: nowrap; opacity: 0; transform: translate(-50%, 8px) scale(0.9); transition: opacity 200ms ease, transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1); pointer-events: none; }
+.home .pip:hover::after { opacity: 1; transform: translate(-50%, -100%) scale(1); }
+
+/* With Pip in the hero, the saved toast pops exactly when Pip catches a clip. */
+.home.fx-on .hero-visual.has-pip .fx-toast { animation: none; opacity: 0; transform: translateY(10px) scale(0.85); transition: opacity 220ms ease, transform 420ms cubic-bezier(0.34, 1.56, 0.64, 1); }
+.home.fx-on .hero-visual.pip-caught .fx-toast { opacity: 1; transform: none; }
+
+@media (max-width: 900px) {
+  .home .pip-hero { width: 160px; left: 12%; bottom: -60px; }
+}
+@media (max-width: 640px) {
+  .home .pip-hero { width: 120px; left: 4%; bottom: -30px; }
+  .home .floating-chip { left: auto; right: 0; }
+  .home .pip-closing { width: 120px; margin: 6px auto -8px; }
+}

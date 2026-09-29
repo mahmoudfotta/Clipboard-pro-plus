@@ -13,7 +13,7 @@ step or external runtime dependency.
 
 ## Enable GitHub Pages
 
-1. Copy this entire `docs/` folder, including `assets/`, `home.css`, `ai.css`, `home-motion.js`, `info.css`, `info-motion.js`, and all policy pages, into the public repository `https://github.com/mahmoudfotta/Clipboard-pro-plus.git`.
+1. Copy this entire `docs/` folder, including `assets/`, `home.css`, `ai.css`, `home-motion.js`, `info.css`, `info-motion.js`, `home-fx.css`, `pip.js`, and all policy pages, into the public repository `https://github.com/mahmoudfotta/Clipboard-pro-plus.git`.
 2. Push that repository.
 3. Open the public repository on GitHub.
 4. Go to `Settings` > `Pages`.
